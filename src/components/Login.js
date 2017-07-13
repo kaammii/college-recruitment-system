@@ -23,6 +23,7 @@ export default class Login extends Component{
 	render(){
 		return (
 			<div className="col-md-offset-3 col-md-6" >
+				<h1 className="text-center" >User Login</h1>
 				<form onSubmit={this.submitHandler} className="form-group">
 					<input type="email" ref={(email)=>this.email = email} placeholder="Enter Email" className="form-control"/><br/>
 					<input type="password" ref={(pw)=>this.pw = pw} placeholder="Enter Password" className="form-control"/><br/>
