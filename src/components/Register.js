@@ -15,15 +15,13 @@ export default class Register extends Component{
 		e.preventDefault();
 		let email = this.email.value;
 		let pw = this.pw.value;
-		let companyName = this.companyName.value;
+		let name = this.name.value;
+		let qual = this.qual.value;
+		let inst = this.inst.value;
+
 		
-		var info = {
-			email: email,
-			pw: pw,
-			companyName
-		}
-		otherInfo('hrlo');
-		auth(email,pw).catch(e=>this.setState(setErrorMsg(e)))
+
+		auth(email,pw,name,qual,inst).catch(e=>this.setState(setErrorMsg(e)));
 		
 	}	
 
@@ -33,10 +31,11 @@ export default class Register extends Component{
 			<div className="col-md-offset-3 col-md-6" >
 				<h1 className="text-center" >Student Registration</h1>
 				<form onSubmit={this.handleSubmit} className="form-group">
+					<input type="text" placeholder="Enter Name" className="form-control" ref={(name)=>this.name=name} /><br/>
 					<input type="email" placeholder="Enter Email" className="form-control" ref={(email)=>this.email=email} /><br/>
 					<input type="password" placeholder="Enter Password" className="form-control" ref={(pw)=>this.pw=pw} /><br/>
-					<input type="text" placeholder="Enter Company Name" className="form-control" ref={(companyName)=>this.companyName=companyName} /><br/>
-
+					<input type="text" placeholder="Enter Qualification" className="form-control" ref={(qual)=>this.qual=qual} /><br/>
+					<input type="text" placeholder="Enter Institution" className="form-control" ref={(inst)=>this.inst=inst} /><br/>
 					{
 			            this.state.registerError &&
 			            <div className="alert alert-danger" role="alert">

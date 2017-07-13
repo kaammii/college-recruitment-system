@@ -1,9 +1,21 @@
 import {ref, firebaseAuth} from '../config/constants';
 
 
-export function auth(email,pw){
+export function auth(email,pw,name,qual,inst){
+	
 	return firebaseAuth().createUserWithEmailAndPassword(email,pw)
-		.then(saveUser) //save user is a function that is executing at the bottom of this file
+		.then(function(user){
+			var currUser = firebaseAuth.currentUser;
+			return ref.child(`users/${user.uid}/info`)
+				.set({
+					email: user.email,
+      				uid: user.uid,
+      				name: name,
+      				qual: qual,
+      				inst: inst
+				})
+		}) //save user is a function that is executing at the bottom of this file
+	
 }
 
 export function logout(){
@@ -16,19 +28,4 @@ export function login(email,pw){
 
 export function resetPassword(email){
 	return firebaseAuth().sendPasswordResetEmail(email)
-}
-
-export function otherInfo(info){
-	return info;
-}
-
-export function saveUser(user){
-	console.log(otherInfo());
-	return ref.child(`users/${user.uid}/info`)
-    .set({
-      email: user.email,
-      uid: user.uid
-      
-    })
-    .then(otherInfo)
 }
