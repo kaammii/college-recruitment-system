@@ -5,7 +5,8 @@ export default class Dashboard extends Component {
        constructor(props){
        	super(props);
        	this.state ={
-			userInfo: []
+			userInfo: [],
+			companyInfo: []
 		}
        }
        componentWillMount(){
@@ -18,12 +19,24 @@ export default class Dashboard extends Component {
 				userRef.on('value',snap=>{
 					//var data = [];
 						var data = [];
+						var companyData = [];
 						snap.forEach(function(childSnapshot) {
 					      var childData = childSnapshot.val();
-						
+							if (childData.info.type==='company') {
+								var info = {
+									cname: childData.info.cname,
+									address: childData.info.address,
+									email: childData.info.email
+								}
+								companyData.push(info);
+								that.setState({
+									companyInfo: companyData
+								})
+								console.log(that.state.companyInfo);
+							}
 
 					      if (childData.info.uid===userId) {
-					      	console.log(childData.info.name)
+					      	
 								var info = {
 									username: childData.info.name,
 									qual: childData.info.qual,
@@ -33,7 +46,7 @@ export default class Dashboard extends Component {
 								that.setState({
 									userInfo: info
 								})
-								console.log(that.state.userInfo);
+								//console.log(that.state.userInfo);
 							}
 					    });
 
@@ -49,7 +62,7 @@ export default class Dashboard extends Component {
 		
 		
 	return (
-		<div classNameName="container-fluid">
+		<div className="container-fluid">
         <div className="row">
             <div className="col-md-5">
                     <div className="col-md-8">
@@ -66,12 +79,12 @@ export default class Dashboard extends Component {
                                     </div>
                                     <div className="col-md-12">
 
-                                        <h2>Sachith Seram</h2>
-                                        <p>Software Developer at ceymplon</p>
+                                        <h2>{this.state.userInfo.username}</h2>
+                                        <p> <span className="glyphicon glyphicon-book"></span> {this.state.userInfo.inst}</p>
                                         <p>
-                                            <a href="#" className="remove-decoration"><i className="glyphicon glyphicon-envelope"></i> poolsachitha@gmail.com</a> <br/>
-                                            <a href="http://sachitha-seram.branded.me/" className="remove-decoration"><i className="glyphicon glyphicon-globe"></i> www.sachitha-seram.branded.me </a><br/>
-                                            <a href="#" className="remove-decoration"> <i className="glyphicon glyphicon-phone"></i> +94 710 000 000</a>
+                                            <a href="#" className="remove-decoration"><i className="glyphicon glyphicon-file"></i> View all jobs</a> <br/>
+                                            <a href="#" className="remove-decoration"><i className="glyphicon glyphicon-info-sign"></i> View all companies </a><br/>
+                                            
                                         </p>
                                     </div>
                                 </div>
@@ -86,19 +99,23 @@ export default class Dashboard extends Component {
 			<table className="table table-condensed">
 				<thead>
 					<tr>
-					<th>Home</th>
-					<th>Home</th>
-					<th>Home</th>
-					<th>Home</th>
+					<th>Name</th>
+					<th>Address</th>
+					<th>Email</th>
+					<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>alkfjlkfaj</td>
-						<td>alkfjlkfaj</td>
-						<td>alkfjlkfaj</td>
+					{
+						this.state.companyInfo.map(function(info){
+					<tr key={info.uid} >
+						<td>{info[0].cname}</td>
+						<td>{info.address}</td>
+						<td>{info.email}</td>
 						<td><button className="btn btn-success"><span className="glyphicon glyphicon-eye-open"></span></button></td>
 					</tr>
+						})
+					}
 					<tr>
 						<td>alkfjlkfaj</td>
 						<td>alkfjlkfaj</td>
