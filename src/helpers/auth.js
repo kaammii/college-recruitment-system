@@ -1,7 +1,7 @@
 import {ref, firebaseAuth} from '../config/constants';
 
 
-export function auth(email,pw,name,qual,inst){
+export function studentAuth(email,pw,name,qual,inst){
 	
 	return firebaseAuth().createUserWithEmailAndPassword(email,pw)
 		.then(function(user){
@@ -13,6 +13,21 @@ export function auth(email,pw,name,qual,inst){
       				name: name,
       				qual: qual,
       				inst: inst
+				})
+		}) //save user is a function that is executing at the bottom of this file
+	
+}
+export function compAuth(email,pw,cname,address){
+	
+	return firebaseAuth().createUserWithEmailAndPassword(email,pw)
+		.then(function(user){
+			var currUser = firebaseAuth.currentUser;
+			return ref.child(`users/${user.uid}/info`)
+				.set({
+					email: user.email,
+      				uid: user.uid,
+      				cname: cname,
+      				address: address
 				})
 		}) //save user is a function that is executing at the bottom of this file
 	

@@ -5,7 +5,7 @@ import Login from './Login';
 import Home from './Home';
 import Dashboard from './protected/Dashboard';
 import {logout} from '../helpers/auth';
-import {firebaseAuth} from '../config/constants';
+import {firebaseAuth,userRef} from '../config/constants';
 import {ref} from '../config/constants';
 
 function PrivateRoute({component: Component, authed, ...rest}){
@@ -40,10 +40,16 @@ export default class App extends Component{
 		this.removeListner = firebaseAuth().onAuthStateChanged((user)=>{
 			if (user) {
 				var userId = user.uid;
-				ref.on('value',snap=>{
+				
+				userRef.on('value',snap=>{
 					//var data = [];
 					
-						console.log(snap.val().users.userId);
+						snap.forEach(function(childSnapshot) {
+					      var childData = childSnapshot.val();
+
+					      if (childData.info.uid===userId) {console.log(childData.info.name)}
+					    });
+
 						
 					
 				})
