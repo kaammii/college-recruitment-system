@@ -6,14 +6,18 @@ export default class Dashboard extends Component {
        	super(props);
        	this.state ={
 			userInfo: [],
-			companyInfo: []
+			companyInfo: [],
+			type: ''
 		}
        }
-       componentWillMount(){
+       componentDidMount(){
        	var that = this;
   		var user_name = '';
   	firebaseAuth().onAuthStateChanged((user)=>{
 			if (user) {
+				if (user.type==='student') { that.setState({type: 'Student'}) }
+					else if (user.type==='company'){that.setState({type: 'Company'})}
+
 				var userId = user.uid;
 				
 				userRef.on('value',snap=>{
@@ -23,19 +27,15 @@ export default class Dashboard extends Component {
 						snap.forEach(function(childSnapshot) {
 					      var childData = childSnapshot.val();
 							if (childData.info.type==='company') {
-								var info = {
-									cname: childData.info.cname,
-									address: childData.info.address,
-									email: childData.info.email
-								}
-								companyData.push(info);
+								
+								companyData.push(childData.info);
 								that.setState({
 									companyInfo: companyData
 								})
-								console.log(that.state.companyInfo);
+								//console.log(that.state.companyInfo);
 							}
 
-					      if (childData.info.uid===userId) {
+					      else if (childData.info.uid===userId) {
 					      	
 								var info = {
 									username: childData.info.name,
@@ -59,15 +59,14 @@ export default class Dashboard extends Component {
   		}
     
   render () {
-		
-		
+
 	return (
 		<div className="container-fluid">
         <div className="row">
             <div className="col-md-5">
                     <div className="col-md-8">
                         <div className="panel panel-default">
-                            <div className="panel-heading"><span className="glyphicon glyphicon-user" ></span> Student</div>
+                            <div className="panel-heading"><span className="glyphicon glyphicon-user" ></span> {this.state.type}</div>
                             <div className="panel-body text-left">
                                 <div className="row">
                                     <div className="col-md-12 ">
@@ -107,21 +106,16 @@ export default class Dashboard extends Component {
 				</thead>
 				<tbody>
 					{
-						this.state.companyInfo.map(function(info){
-					<tr key={info.uid} >
-						<td>{info[0].cname}</td>
-						<td>{info.address}</td>
-						<td>{info.email}</td>
+						
+						this.state.companyInfo.map((index)=>
+					<tr key={index.uid}>
+						<td>{index.cname}</td>
+						<td>{index.address}</td>
+						<td>{index.email}</td>
 						<td><button className="btn btn-success"><span className="glyphicon glyphicon-eye-open"></span></button></td>
 					</tr>
-						})
+					)
 					}
-					<tr>
-						<td>alkfjlkfaj</td>
-						<td>alkfjlkfaj</td>
-						<td>alkfjlkfaj</td>
-						<td><button className="btn btn-success"><span className="glyphicon glyphicon-eye-open"></span></button></td>
-					</tr>
 				</tbody>
 			</table>	
         </div>
