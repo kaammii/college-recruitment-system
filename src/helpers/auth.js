@@ -12,7 +12,8 @@ export function studentAuth(email,pw,name,qual,inst){
       				uid: user.uid,
       				name: name,
       				qual: qual,
-      				inst: inst
+      				inst: inst,
+      				type: 'student'
 				})
 		}) //save user is a function that is executing at the bottom of this file
 	
@@ -27,7 +28,8 @@ export function compAuth(email,pw,cname,address){
 					email: user.email,
       				uid: user.uid,
       				cname: cname,
-      				address: address
+      				address: address,
+      				type:'company'
 				})
 		}) //save user is a function that is executing at the bottom of this file
 	
