@@ -46,8 +46,9 @@ export default class App extends Component{
 					
 						snap.forEach(function(childSnapshot) {
 					      var childData = childSnapshot.val();
+					      console.log(childData.info.type)
 
-					      if (childData.info.uid===userId) {console.log(childData.info.name)}
+					      //if (childData.info.uid===userId) {console.log(childData.info.name)}
 					    });
 
 						
