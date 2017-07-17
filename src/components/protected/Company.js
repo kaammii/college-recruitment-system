@@ -3,6 +3,7 @@ import {firebaseAuth,userRef} from '../../config/constants';
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom';
 import StudentList from './StudentList';
 import JobPost from './JobPost';
+import Jobs from './Jobs';
 
 export default class Student extends Component{
 
@@ -99,6 +100,7 @@ render(){
         		<Switch>
         			<Route path="/Dashboard/StudentInfo" component={StudentList} />
         			<Route path="/Dashboard/JobPost" component={JobPost} />
+        			<Route path="/Dashboard/JobsList" component={Jobs} />
         		</Switch>
         </div>
      </div>	

@@ -29,13 +29,14 @@ export default class Dashboard extends Component {
 							var companyData = [];
 							snap.forEach(function(childSnapshot) {
 						      var childData = childSnapshot.val();
+							
 								if (childData.info.uid===userId) {
 					      	
 								if (childData.info.type==='student') { that.setState({student: true}) }
 								else if (childData.info.type==='company'){that.setState({company:true})} 
 								
 								//console.log(that.state.userInfo);
-							}
+							} 
 					    });
 
 						

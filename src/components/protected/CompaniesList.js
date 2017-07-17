@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import {firebaseAuth,userRef} from '../../config/constants';
+import Loader from '../Loader';
 
 export default class CompaniesList extends Component{
 	
 	constructor(props){
 		super(props);
 		this.state = {
-			companyInfo: []
+			companyInfo: [],
+			loading: true
 		}
 	}
 
 	componentDidMount(){
 		var that  = this;
-	firebaseAuth().onAuthStateChanged((user)=>{
+	this.removeListner= firebaseAuth().onAuthStateChanged((user)=>{
 		if (user) {
 			var userId  = user.uid;
 			userRef.on('value',snap=>{
@@ -24,7 +26,8 @@ export default class CompaniesList extends Component{
 						if (childData.info.type==='company') {
 							companyData.push(childData.info);
 							that.setState({
-								companyInfo: companyData
+								companyInfo: companyData,
+								loading: false
 							});
 						}
 				})
@@ -32,12 +35,15 @@ export default class CompaniesList extends Component{
 		}
 	})
 	}
+	componentWillUnmount(){
+			this.removeListner()
+	}
 
 	render(){
-		return(
-			<div>
+		return this.state.loading===true ? <Loader />  : (
+			<div className="back" >
 				<h1 className="panel-heading">List of Companies</h1>
-			<table className="table table-condensed">
+			<table className="table table-condensed table-back">
 				<thead>
 					<tr>
 					<th>Name</th>

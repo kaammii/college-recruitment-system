@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {firebaseAuth,userRef} from '../../config/constants';
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom';
 import CompaniesList from './CompaniesList';
+import StudentJobs from './StudentJobs';
 
 export default class Student extends Component{
 
@@ -90,7 +91,7 @@ render(){
                                         <h2>{this.state.userInfo.username}</h2>
                                         <p> <span className="glyphicon glyphicon-book"></span> {this.state.userInfo.inst}</p>
                                         <p>
-                                            <a href="#" className="remove-decoration"><i className="glyphicon glyphicon-file"></i> View all jobs</a> <br/>
+                                            <Link to="/Dashboard/JobsView" ><a href="#" className="remove-decoration"><i className="glyphicon glyphicon-file"></i> View all jobs</a> </Link><br/>
                                             <Link to="/Dashboard/CompanyInfo" ><a href="#" className="remove-decoration"><i className="glyphicon glyphicon-info-sign"></i> View all companies </a><br/></Link>
                                             
                                         </p>
@@ -105,6 +106,7 @@ render(){
         <div className="col-md-6">
         		<Switch>
         			<Route path="/Dashboard/CompanyInfo" component={CompaniesList} />
+        			<Route path="/Dashboard/JobsView" component={StudentJobs} />
         		</Switch>
         </div>
      </div>	

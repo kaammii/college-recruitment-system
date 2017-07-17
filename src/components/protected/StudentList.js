@@ -37,7 +37,7 @@ export default class CompaniesList extends Component{
 		return(
 			<div className="back" >
 				<h1 className="panel-heading">List of Students</h1>
-			<table className="table table-condensed">
+			<table className="table table-condensed table-back">
 				<thead>
 					<tr>
 					<th>Name</th>

@@ -7,6 +7,7 @@ import Dashboard from './protected/Dashboard';
 import {logout} from '../helpers/auth';
 import {firebaseAuth,userRef} from '../config/constants';
 import {ref} from '../config/constants';
+import Loader from './Loader';
 
 function PrivateRoute({component: Component, authed, ...rest}){
 	return(
@@ -34,26 +35,12 @@ function PublicRoute({component: Component, authed, ...rest}){
 export default class App extends Component{
 	state = {
 		authed: false,
-		loading: false
+		loading: true
 	}
 	componentDidMount(){
 		this.removeListner = firebaseAuth().onAuthStateChanged((user)=>{
 			if (user) {
-				var userId = user.uid;
 				
-				userRef.on('value',snap=>{
-					//var data = [];
-					
-						snap.forEach(function(childSnapshot) {
-					      var childData = childSnapshot.val();
-					      console.log(childData.info.type)
-
-					      //if (childData.info.uid===userId) {console.log(childData.info.name)}
-					    });
-
-						
-					
-				})
 				this.setState({
 					authed:true,
 					loading:false 
@@ -61,7 +48,7 @@ export default class App extends Component{
 			} else{
 				this.setState({
 					authed:false,
-					loading: false 
+					loading: true 
 				});
 			}
 		})
@@ -70,7 +57,7 @@ export default class App extends Component{
 		this.removeListner()
 	}
 	render(){
-		return this.state.loading===true ?<h1>Loading</h1> :(
+		return(
 				<BrowserRouter>
 					<div>
 						<nav className="navbar navbar-default navbar-static-top">
