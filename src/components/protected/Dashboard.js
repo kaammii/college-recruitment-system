@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {firebaseAuth,userRef} from '../../config/constants';
 import Student from './Student';
+import Company from './Company';
 
 
 export default class Dashboard extends Component {
@@ -54,7 +55,10 @@ export default class Dashboard extends Component {
 		<div>
 		{
 			this.state.student &&
-			<Student />
+			<Student />}
+			{
+			this.state.company &&
+			<Company />
 		}
         </div> 
     )
