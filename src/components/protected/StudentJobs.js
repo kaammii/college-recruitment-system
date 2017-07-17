@@ -35,6 +35,9 @@ export default class StudentJobs extends Component{
 		}
 	})
 	}
+	handleClick=(value)=>{
+		alert(value);
+	}
 	
 
 	render(){
@@ -59,7 +62,7 @@ export default class StudentJobs extends Component{
 						<td>{index.companyName}</td>
 						<td>{index.jobTitle}</td>
 						<td>{index.salary}</td>
-						<td><button className="btn btn-success">Apply</button></td>
+						<td><button onClick={()=>this.handleClick(index.jobTitle)} className="btn btn-success">Apply</button></td>
 					</tr>
 						
 				</tbody>

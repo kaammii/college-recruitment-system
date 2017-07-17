@@ -43,6 +43,9 @@ export default class CompaniesList extends Component{
 		return this.state.loading===true ? <Loader />  : (
 			<div className="back" >
 				<h1 className="panel-heading">List of Companies</h1>
+				{
+						
+					this.state.companyInfo.map((index)=>
 			<table className="table table-condensed table-back">
 				<thead>
 					<tr>
@@ -53,20 +56,18 @@ export default class CompaniesList extends Component{
 					</tr>
 				</thead>
 				<tbody>
-					{
-						
-					this.state.companyInfo.map((index)=>
+					
 					<tr key={index.uid}>
 						<td>{index.cname}</td>
 						<td>{index.address}</td>
 						<td>{index.email}</td>
 						
 					</tr>
-					)
-					}	
+					
 				</tbody>
 			</table>	
-			
+			)
+					}	
 			</div>
 			)
 	}
