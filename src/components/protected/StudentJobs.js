@@ -31,7 +31,8 @@ export default class StudentJobs extends Component{
 							companyData.push(childData)
 							that.setState({
 								jobInfo:companyData,
-								loading:false 
+								loading:false,
+								user_id: user.uid 
 							});
 				})
 			})
@@ -39,16 +40,20 @@ export default class StudentJobs extends Component{
 				var applicantData = [];
 				applicantSnap.forEach(function(childSnap){
 					var childData = childSnap.val();
-					
+					var arr = that.state.jobInfo;
+
 					applicantData.push(childData);
+					
 					that.setState({
 						applicantInfo: applicantData
 					});
+					var app = that.state.applicantInfo;
+					
 				})
 			})
 		}
 		that.handleClick=(value)=>{
-			ref.child(`applicants`)
+			ref.child(`jobpost/applicants`)
 				.push({
 					userId: userId,
 					jobTitle: value
@@ -63,10 +68,11 @@ export default class StudentJobs extends Component{
 		return this.state.loading===true ? <Loader />  : (
 			<div className="back" >
 				<h1 className="panel-heading">Jobs Available</h1>
-			
-						{
+				 
+						{ 
 					this.state.jobInfo.map((index)=>
-			<table className="table table-condensed table-back">
+				<div>		
+			<table className="table table-condensed table-back" >
 				<thead>
 					<tr>
 					<th>Company</th>
@@ -76,20 +82,25 @@ export default class StudentJobs extends Component{
 					</tr>
 				</thead>
 				<tbody>
-					{console.log(this.state.applicantInfo,"sfdddgdfg")}
+
 					<tr>
 						<td>{index.companyName}</td>
 						<td>{index.jobTitle}</td>
 						<td>{index.salary}</td>
-						<td><button onClick={()=>this.handleClick(index.jobTitle)} className="btn btn-success">Apply</button></td>
+							
+						<td><button onClick={()=>this.handleClick(index.jobTitle)} className="btn btn-success">Apply</button></td> 
+
 					</tr>
 						
 				</tbody>
 			</table>
-			)
-					}
-			
+				<div className="applicants" >
+					
+				</div>
 			</div>
+			)} 
+			</div>
+
 			)
 	}
 } 
