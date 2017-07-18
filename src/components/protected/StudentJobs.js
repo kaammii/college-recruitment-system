@@ -95,7 +95,21 @@ export default class StudentJobs extends Component{
 				</tbody>
 			</table>
 				<div className="applicants" >
-					
+				{ this.state.applicantInfo.map((applicant)=>{
+					{console.log(index.jobTitle +" "+applicant.jobTitle)}
+					{applicant.jobTitle === index.jobTitle ? 
+					<table className="table table-condensed table-back" > 
+						<thead> 
+							<th>Name</th>
+							<th>Email</th>
+						</thead>
+						<tbody> 
+							<tr> 
+								<td>lkasdjkdsa</td>
+								<td>sdassd</td>
+						    </tr>
+						</tbody>
+					</table> : <h2>No applicant</h2> } }) }
 				</div>
 			</div>
 			)} 
