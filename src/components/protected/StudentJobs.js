@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {firebaseAuth,userRef,jobsRef} from '../../config/constants';
+import {firebaseAuth,userRef,jobsRef,ref,applicantRef} from '../../config/constants';
 import Loader from '../Loader';
 
 export default class StudentJobs extends Component{
@@ -8,44 +8,63 @@ export default class StudentJobs extends Component{
 		super(props);
 		this.state = {
 			jobInfo: [],
-			loading: true
+			loading: true,
+			user_id: '',
+			applicantInfo: []
 		}
 	}
-
-	componentDidMount(){
+	
+	componentWillMount(){
 		var that  = this;
+
 	firebaseAuth().onAuthStateChanged((user)=>{
 		if (user) {
 			var userId  = user.uid;
+			that.setState({ user_id: userId })
 			jobsRef.on('value',snap=>{
 				var data = [];
 				var companyData = [];
 
 				snap.forEach(function(childSnap){
 						var childData  = childSnap.val();
-						
+							
 							companyData.push(childData)
 							that.setState({
-								jobInfo:companyData 
+								jobInfo:companyData,
+								loading:false 
 							});
-						
-						
+				})
+			})
+			applicantRef.on('value',applicantSnap=>{
+				var applicantData = [];
+				applicantSnap.forEach(function(childSnap){
+					var childData = childSnap.val();
+					
+					applicantData.push(childData);
+					that.setState({
+						applicantInfo: applicantData
+					});
 				})
 			})
 		}
+		that.handleClick=(value)=>{
+			ref.child(`applicants`)
+				.push({
+					userId: userId,
+					jobTitle: value
+				})
+		}
 	})
 	}
-	handleClick=(value)=>{
-		alert(value);
-	}
+	
 	
 
 	render(){
-		return this.state.loading===false ? <Loader />  : (
+		return this.state.loading===true ? <Loader />  : (
 			<div className="back" >
 				<h1 className="panel-heading">Jobs Available</h1>
-			{
-						
+			
+						{
 					this.state.jobInfo.map((index)=>
 			<table className="table table-condensed table-back">
 				<thead>
@@ -57,7 +76,7 @@ export default class StudentJobs extends Component{
 					</tr>
 				</thead>
 				<tbody>
-					
+					{console.log(this.state.applicantInfo,"sfdddgdfg")}
 					<tr>
 						<td>{index.companyName}</td>
 						<td>{index.jobTitle}</td>

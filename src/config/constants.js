@@ -14,3 +14,4 @@ const config = {
   export const firebaseAuth = firebase.auth
   export const userRef = firebase.database().ref('users');
   export const jobsRef = firebase.database().ref('jobpost');
+  export const applicantRef = firebase.database().ref('applicants');
