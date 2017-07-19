@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {firebaseAuth,userRef} from '../../config/constants';
 import Student from './Student';
 import Company from './Company';
+//	import Admin from './Admin';
 
 
 export default class Dashboard extends Component {
@@ -11,7 +12,8 @@ export default class Dashboard extends Component {
 				userInfo: [],
 				companyInfo: [],
 				student: false,
-				company: false
+				company: false,
+				admin:false
 			}
 	       }
 	       componentDidMount(){
@@ -33,7 +35,8 @@ export default class Dashboard extends Component {
 								if (childData.info.uid===userId) {
 					      	
 								if (childData.info.type==='student') { that.setState({student: true}) }
-								else if (childData.info.type==='company'){that.setState({company:true})} 
+								else if (childData.info.type==='company'){that.setState({company:true})}
+								//else if (childData.info.type==='admin') {that.setState({admin:true})} 
 								
 								//console.log(that.state.userInfo);
 							} 
@@ -61,6 +64,7 @@ export default class Dashboard extends Component {
 			this.state.company &&
 			<Company />
 		}
+			
         </div> 
     )
   }

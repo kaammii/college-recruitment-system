@@ -24,15 +24,13 @@ export default class StudentJobs extends Component{
 			jobsRef.on('value',snap=>{
 				var data = [];
 				var companyData = [];
-
 				snap.forEach(function(childSnap){
 						var childData  = childSnap.val();
-							
+							console.log(childData.new);
 							companyData.push(childData)
 							that.setState({
 								jobInfo:companyData,
-								loading:false,
-								user_id: user.uid 
+								loading:false 
 							});
 				})
 			})
@@ -40,24 +38,20 @@ export default class StudentJobs extends Component{
 				var applicantData = [];
 				applicantSnap.forEach(function(childSnap){
 					var childData = childSnap.val();
-					var arr = that.state.jobInfo;
-
-					applicantData.push(childData);
 					
+					applicantData.push(childData);
 					that.setState({
 						applicantInfo: applicantData
 					});
-					var app = that.state.applicantInfo;
-					
 				})
 			})
 		}
 		that.handleClick=(value)=>{
-			ref.child(`jobpost/applicants`)
+			ref.child(`jobpost`)
 				.push({
 					userId: userId,
 					jobTitle: value
-				})
+				})	
 		}
 	})
 	}
@@ -68,11 +62,10 @@ export default class StudentJobs extends Component{
 		return this.state.loading===true ? <Loader />  : (
 			<div className="back" >
 				<h1 className="panel-heading">Jobs Available</h1>
-				 
-						{ 
+			
+						{
 					this.state.jobInfo.map((index)=>
-				<div>		
-			<table className="table table-condensed table-back" >
+			<table className="table table-condensed table-back">
 				<thead>
 					<tr>
 					<th>Company</th>
@@ -82,39 +75,20 @@ export default class StudentJobs extends Component{
 					</tr>
 				</thead>
 				<tbody>
-
+					
 					<tr>
 						<td>{index.companyName}</td>
 						<td>{index.jobTitle}</td>
 						<td>{index.salary}</td>
-							
-						<td><button onClick={()=>this.handleClick(index.jobTitle)} className="btn btn-success">Apply</button></td> 
-
+						<td><button onClick={()=>this.handleClick(index.jobTitle)} className="btn btn-success">Apply</button></td>
 					</tr>
 						
 				</tbody>
 			</table>
-				<div className="applicants" >
-				{ this.state.applicantInfo.map((applicant)=>{
-					{console.log(index.jobTitle +" "+applicant.jobTitle)}
-					{applicant.jobTitle === index.jobTitle ? 
-					<table className="table table-condensed table-back" > 
-						<thead> 
-							<th>Name</th>
-							<th>Email</th>
-						</thead>
-						<tbody> 
-							<tr> 
-								<td>lkasdjkdsa</td>
-								<td>sdassd</td>
-						    </tr>
-						</tbody>
-					</table> : <h2>No applicant</h2> } }) }
-				</div>
+			)
+					}
+			
 			</div>
-			)} 
-			</div>
-
 			)
 	}
 } 
