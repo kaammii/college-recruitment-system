@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {firebaseAuth,userRef,jobsRef,ref,applicantRef} from '../../config/constants';
 import Loader from '../Loader';
+import Applicants from './Applicants';
 
 export default class StudentJobs extends Component{
 	
@@ -45,9 +46,10 @@ export default class StudentJobs extends Component{
 					});
 				})
 			})
+
 		}
 		that.handleClick=(value)=>{
-			ref.child(`jobpost`)
+			ref.child(`applicants`)
 				.push({
 					userId: userId,
 					jobTitle: value
@@ -65,6 +67,7 @@ export default class StudentJobs extends Component{
 			
 						{
 					this.state.jobInfo.map((index)=>
+						<div>
 			<table className="table table-condensed table-back">
 				<thead>
 					<tr>
@@ -80,11 +83,16 @@ export default class StudentJobs extends Component{
 						<td>{index.companyName}</td>
 						<td>{index.jobTitle}</td>
 						<td>{index.salary}</td>
-						<td><button onClick={()=>this.handleClick(index.jobTitle)} className="btn btn-success">Apply</button></td>
+						<td><button onClick={()=>this.handleClick(index.jobTitle)} className=" btn-default">Apply</button></td>
 					</tr>
-						
+
 				</tbody>
 			</table>
+				<div className=""  >
+					<Applicants jobTitle={index.jobTitle} userId={this.state.user_id} />
+				</div>
+
+				</div>
 			)
 					}
 			

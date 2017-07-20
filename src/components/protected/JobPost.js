@@ -16,7 +16,7 @@ constructor(props){
 			var salary = this.salary.value;
 			var that = this;
 			if (this.jobTitle.value==='' || this.salary.value==='') {
-				alert('fdlkajlkafjl;');
+				alert('Please fill out both the fields.');
 			}
 			else{
 		firebaseAuth().onAuthStateChanged((user)=>{

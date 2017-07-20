@@ -52,13 +52,23 @@ constructor(props){
 	render(){
 		return(
 			<div className="back">
-				<h1 className="text-center">Post a Job</h1>
+				<h1 className="text-center">Create your CV</h1>
 				<form className="form-group" onSubmit={this.submitHandle} >
-					<label>Job Title: </label>
-					<input type="text" ref={(jobTitle)=>this.jobTitle =jobTitle} className="form-control" placeholder="Enter Job Title" /><br/>
-					<label>Salary: </label>
-					<input type="text" ref={(salary)=>this.salary=salary} className="form-control" placeholder="Enter Salary" /><br/>
-					<input type="submit" className="btn btn-lg btn-primary" value="Post" />
+					<label>Name: </label>
+					<input type="text" ref={(name)=>this.name =name} className="form-control" placeholder="Enter Name" /><br/>
+					<label>Email: </label>
+					<input type="text" ref={(email)=>this.email=email} className="form-control" placeholder="Enter Email" /><br/>
+					<h2>Education</h2>
+					<label>Qualification: </label>
+					<input type="text" ref={(qual)=>this.qual=qual} className="form-control" placeholder="Enter Qualification" /><br/>
+					<label>Institution: </label>
+					<input type="text" ref={(inst)=>this.inst=inst} className="form-control" placeholder="Enter Institution Name" /><br/>
+					<h2>Work Experience</h2>
+					<label>Organization: </label>
+					<input type="text" ref={(org)=>this.org=org} className="form-control" placeholder="Enter Organization Name" /><br/>
+					<label>Position: </label>
+					<input type="text" ref={(pos)=>this.pos=pos} className="form-control" placeholder="Enter Position" /><br/>
+					<input type="submit" className="btn-lg btn-default" value="Create" />
 				</form>
 			</div>
 			)
