@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
-import {firebaseAuth,userRef,jobsRef,ref,applicantRef} from '../../config/constants';
+import {firebaseAuth,userRef,jobsRef,ref,applicantRef,cv} from '../../config/constants';
 
 export default class Applicants extends Component{
 	constructor(props){
 		super(props);
 		this.state= {
 			applicantInfo: [],
-			studentInfo: []
+			studentInfo: [],
+			user_id: ''
 		}
 	}
 	componentWillMount(){
-		var that = this;
+		var that = this; 
 		applicantRef.on('value',applicantSnap=>{
 				var applicantData = [];
 				applicantSnap.forEach(function(childSnap){
 					var childData = childSnap.val();
-					if (that.props.jobTitle===childData.jobTitle) {
+					
 						applicantData.push(childData);
 						that.setState({
 						applicantInfo: applicantData
 						});
-					}
+					
 				})
-			})
+			})/*
 		userRef.on('value',student=>{
 				var studentData = [];
 				student.forEach(childSnap=>{
@@ -37,19 +38,25 @@ export default class Applicants extends Component{
 							studentInfo: studentData
 						});
 				})
-			})
+			}) */
+			
+
 
 	}
 
 	render(){
 		return(
 			<div>
-				{this.state.studentInfo.map((app)=>
-					<div>
-						<h1>{app.info.name}</h1>
+				{this.state.applicantInfo.map((app,index)=>
+					<div key={index}>
+						<h3>{app.jobTitle}</h3>
+						{
+							this.setState({
+								user_id: app.userId
+							})
+						}
 					</div>
-					)}
-				
+				)}
 			</div>
 			)
 	}

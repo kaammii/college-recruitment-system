@@ -12,41 +12,34 @@ constructor(props){
 	componentWillMount(){
 		this.submitHandle=(e)=>{
 			e.preventDefault();
-			var jobTitle = this.jobTitle.value;
-			var salary = this.salary.value;
-			var that = this;
-			if (this.jobTitle.value==='' || this.salary.value==='') {
-				alert('fdlkajlkafjl;');
-			}
-			else{
+			
+			
 		firebaseAuth().onAuthStateChanged((user)=>{
 			if (user) {
-				userRef.on('value',snap=>{
-					snap.forEach(function(childSnap){
-						var childSnap = childSnap.val();
-						if (childSnap.info.uid===user.uid) {
-								ref.child(`jobpost`)
-								.push({
-									companyName: childSnap.info.cname,
-									jobTitle:jobTitle,
-									salary: salary,
-									uid: user.uid
-								}, function(error){
-									if (error) {
-										
-									}
-										else{
-											
-											that.jobTitle.value = '';
-											that.salary.value = '';
-										}
-								})
-						}
+				var name = this.name.value;
+				var email = this.email.value;
+				var qual = this.qual.value;
+				var inst = this.inst.value;
+				var org = this.org.value;
+				var pos = this.pos.value;
+				ref.child('cv')
+					.push({
+						name: name,
+						email: email,
+						qual: qual,
+						inst: inst,
+						org: org,
+						pos:pos,
+						uid: user.uid
+					},function(error){
+						if (error) {}
+							else{
+								
+							}
 					})
-				})
 			}
 		}) 
-	}
+	
 	}
 	}
 	render(){

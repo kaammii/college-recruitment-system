@@ -4,6 +4,7 @@ import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom';
 import StudentList from './StudentList';
 import JobPost from './JobPost';
 import Jobs from './Jobs';
+import Applicant from './Applicants';
 
 export default class Student extends Component{
 
@@ -86,7 +87,8 @@ render(){
                                         <p>
                                             <Link to="/Dashboard/StudentInfo" ><a href="#" className="remove-decoration"><i className="glyphicon glyphicon-file"></i> View all Students</a></Link><br/>
                                             <Link to="/Dashboard/JobPost" ><a href="#" className="remove-decoration"><i className="glyphicon glyphicon-info-sign"></i> Post a Job </a><br/></Link>
-                                            <Link to="/Dashboard/JobsList" ><a href="#" className="remove-decoration"><i className="glyphicon glyphicon-info-sign"></i> View my Jobs </a></Link>
+                                            <Link to="/Dashboard/JobsList" ><a href="#" className="remove-decoration"><i className="glyphicon glyphicon-info-sign"></i> View my Jobs </a></Link><br/>
+                                        	<Link to="/Dashboard/Applicant" ><a href="#" className="remove-decoration"><i className="glyphicon glyphicon-file"></i>View all applicants</a></Link>
                                         </p>
                                     </div>
                                 </div>
@@ -101,6 +103,7 @@ render(){
         			<Route path="/Dashboard/StudentInfo" component={StudentList} />
         			<Route path="/Dashboard/JobPost" component={JobPost} />
         			<Route path="/Dashboard/JobsList" component={Jobs} />
+        			<Route path="/Dashboard/Applicant" component={Applicant} />
         		</Switch>
         </div>
      </div>	

@@ -16,3 +16,4 @@ const config = {
   export const jobsRef = firebase.database().ref('jobpost');
   export const applicantRef = firebase.database().ref('applicants');
   export const applicantR = firebase.database().ref('jobpost/applicants');
+  export const cv = firebase.database().ref('cv');
