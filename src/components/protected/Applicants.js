@@ -7,11 +7,14 @@ export default class Applicants extends Component{
 		this.state= {
 			applicantInfo: [],
 			studentInfo: [],
-			user_id: ''
+			user_id: '',
+			cvInfo:[],
+			rawInfo: {}
 		}
 	}
-	componentWillMount(){
-		var that = this; 
+	componentDidMount(){
+		var that = this;
+		firebaseAuth().onAuthStateChanged((user)=>{ 
 		applicantRef.on('value',applicantSnap=>{
 				var applicantData = [];
 				applicantSnap.forEach(function(childSnap){
@@ -19,11 +22,28 @@ export default class Applicants extends Component{
 					
 						applicantData.push(childData);
 						that.setState({
-						applicantInfo: applicantData
+						applicantInfo: applicantData,
+						rawInfo: childData
 						});
 					
 				})
-			})/*
+			})
+			cv.on('value',cvSnap=>{
+				var cvData = [];
+				cvSnap.forEach(function(childSnap){
+					var childData = childSnap.val();
+							if(that.state.rawInfo.userId===childData.uid){
+							cvData.push(childData);
+							that.setState({
+								cvInfo: cvData
+							})
+						}
+					
+					
+				})
+			})
+		})
+			/*
 		userRef.on('value',student=>{
 				var studentData = [];
 				student.forEach(childSnap=>{
@@ -42,19 +62,35 @@ export default class Applicants extends Component{
 			
 
 
-	}
-
+	} 
+	
 	render(){
 		return(
-			<div>
-				{this.state.applicantInfo.map((app,index)=>
+			<div className="back" >
+				<h1>List of Applicants</h1>
+				{this.state.cvInfo.map((cv,index)=>
 					<div key={index}>
-						<h3>{app.jobTitle}</h3>
-						{
-							this.setState({
-								user_id: app.userId
-							})
-						}
+						<table className="table table-condensed table-back">
+							<thead>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Qualification</th>
+								<th>Institute</th>
+								<th>Organization</th>
+								<th>Position</th>
+							</thead>
+							<tbody>
+								 <tr>
+									<td>{cv.name}</td>
+									<td>{cv.email}</td>
+									<td>{cv.qual}</td>
+									<td>{cv.inst}</td>
+									<td>{cv.org}</td>
+									<td>{cv.pos}</td>
+
+								 </tr>
+							</tbody>
+						</table>
 					</div>
 				)}
 			</div>

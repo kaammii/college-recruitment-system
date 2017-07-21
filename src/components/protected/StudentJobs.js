@@ -88,9 +88,7 @@ export default class StudentJobs extends Component{
 
 				</tbody>
 			</table>
-				<div className=""  >
-					<Applicants jobTitle={index.jobTitle} userId={this.state.user_id} />
-				</div>
+				
 
 				</div>
 			)
