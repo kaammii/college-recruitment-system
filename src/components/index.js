@@ -60,7 +60,7 @@ export default class App extends Component{
 		return(
 				<BrowserRouter>
 					<div>
-						<nav className="navbar navbar-default navbar-static-top">
+						<nav className="navbar navbar-inverse navbar-static-top">
 				            <div className="container">
 				              <div className="navbar-header">
 				                <Link to="/" className="navbar-brand">Campus Recruitment System</Link>
@@ -88,8 +88,8 @@ export default class App extends Component{
           					</ul>
 					    </div>
 					</nav>
-					<div className="container" >
-						<div className="row">
+					<div className="" >
+						<div className="">
 							<Switch>
 								<Route exact path="/"  component={Home} />
 								<PublicRoute authed={this.state.authed} path='/Login' component={Login} />
