@@ -2,7 +2,9 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+
 }
+
 .back{
 	background: #eee;
 	padding: 20px;
@@ -32,10 +34,7 @@ body {
 	background-image: url("http://www.rkgit.edu.in/images/campus.jpg");
 }
 .back-image{
-	min-width: 100%;
-	min-height: 100%;
-	height: 591px;
-	background-color: white;
+
 	
 }
 .back-image h1 {
@@ -45,4 +44,5 @@ body {
 	text-align: center;
 	line-height: 591px;
 	color: white;
+
 }
