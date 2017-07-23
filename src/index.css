@@ -32,6 +32,12 @@ body {
 }
 .main{
 	background-image: url("http://www.rkgit.edu.in/images/campus.jpg");
+	min-width: 100%;
+	min-height: 100%;
+	height: auto;
+	width: auto;
+	position: absolute;
+	margin: auto;
 }
 .back-image{
 
@@ -43,6 +49,5 @@ body {
 	font-weight: 3em;
 	text-align: center;
 	line-height: 591px;
-	color: white;
 
 }

@@ -64,7 +64,7 @@ export default class Student extends Component{
 render(){
 	return(
 <BrowserRouter>
-	<div className="container-fluid">
+	<div className="container">
         <div className="row">
             <div className="col-md-5">
                     <div className="col-md-8">
@@ -98,7 +98,7 @@ render(){
      			</div>
         
 
-        <div className="col-md-6">
+        	<div className="col-md-6">
         		<Switch>
         			<Route path="/Dashboard/StudentInfo" component={StudentList} />
         			<Route path="/Dashboard/JobPost" component={JobPost} />
