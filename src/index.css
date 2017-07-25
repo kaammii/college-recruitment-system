@@ -51,3 +51,8 @@ body {
 	line-height: 591px;
 
 }
+.delete_btn{
+	cursor: pointer;
+	background-color: green;
+	color: white;
+}

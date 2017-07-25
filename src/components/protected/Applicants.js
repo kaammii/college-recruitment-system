@@ -87,7 +87,6 @@ export default class Applicants extends Component{
 									<td>{cv.inst}</td>
 									<td>{cv.org}</td>
 									<td>{cv.pos}</td>
-
 								 </tr>
 							</tbody>
 						</table>
