@@ -17,24 +17,19 @@ export default class Admin extends Component{
 
 		}
 	}	
-	componentWillMount(){
+	componentDidMount(){
 		var that = this;
 		var user_name = '';
 		firebaseAuth().onAuthStateChanged((user)=>{
 			if (user) {
-
-
 				var userId = user.uid;
-
+				console.log(user)
 				userRef.on('value',snap=>{
 						//var data = [];
 						var data = [];
 						var companyData = [];
 						snap.forEach(function(childSnapshot) {
 							var childData = childSnapshot.val();
-
-
-
 							if (childData.info.uid===userId) {
 
 								var info = {
@@ -53,6 +48,8 @@ export default class Admin extends Component{
 						
 
 					})
+			} else {
+				alert('asds')
 			}
 		})
 
